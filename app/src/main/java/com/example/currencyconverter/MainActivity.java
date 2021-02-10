@@ -8,10 +8,14 @@ import com.google.android.material.snackbar.Snackbar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import android.util.Log;
 import android.view.View;
 
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.EditText;
+import android.widget.ImageButton;
+import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -21,6 +25,8 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+
 
         FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -52,5 +58,18 @@ public class MainActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    public void cashButtonClickFunction(View view){
+
+        ImageButton image = findViewById(R.id.cashButton);
+//        EditText myTextField = (EditText) findViewById(R.id.cashButton);
+        Log.i("Info", "Cash Button Pressed");
+
+
+        image.setImageResource(R.drawable.fl_studio_14089);
+//        Toast.makeText(MainActivity.this, "Hello", Toast.LENGTH_LONG).show();
+
+
     }
 }
