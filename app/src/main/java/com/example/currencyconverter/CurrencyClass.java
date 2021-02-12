@@ -1,17 +1,9 @@
 package com.example.currencyconverter;
+
 import android.widget.EditText;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.OutputStream;
-import java.io.OutputStreamWriter;
-import java.math.RoundingMode;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.ProtocolException;
-import java.net.URL;
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 
 public class CurrencyClass {
     private static double USDtoCad = 1.27;
