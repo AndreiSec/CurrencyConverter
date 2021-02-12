@@ -1,5 +1,6 @@
 package com.example.currencyconverter;
 
+import android.content.Context;
 import android.widget.EditText;
 
 import java.math.BigDecimal;
@@ -17,7 +18,7 @@ public class CurrencyClass {
     public static String currencyTo;
 
     // Converts currencies and outputs the result as a string
-    public static String currencyConvertFunction(EditText inputNumber){
+    public static String currencyConvertFunction(Context context, EditText inputNumber){
     String result;
     Double numberResult;
     Double amountFrom = Double.parseDouble(inputNumber.getText().toString());
@@ -75,7 +76,9 @@ public class CurrencyClass {
     numberResult = round(numberResult, 2);
     result = String.valueOf(numberResult);
 
-
+    // FINALLY, SAVE TO FILE. This is done so the user can see their previous conversions
+        // Even after closing the app
+        new phonestorageClass().saveToFile(context,round(amountFrom, 2), numberResult, currencyFrom, currencyTo);
 
 
     return result;

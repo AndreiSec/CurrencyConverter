@@ -1,5 +1,6 @@
 package com.example.currencyconverter;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -19,7 +20,7 @@ import androidx.appcompat.app.AppCompatActivity;
 public class MainActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener{
 
 
-
+    private static Context context;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,7 +40,9 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         spinnerTo.setOnItemSelectedListener(this);
         //
 
-
+        // Set application context;
+        context = getApplicationContext();
+        Log.i("Context:", context.toString());
 
         // Set up a listener to change the activity to the previous conversion
 //        FloatingActionButton toPreviousConversions = findViewById(R.id.menuButton);
@@ -96,7 +99,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
             // Since all variables are public, this function does not need any parameters.
             if (!inputNumber.getText().toString().equals("")) {
-                String result = CurrencyClass.currencyConvertFunction(inputNumber);
+                String result = CurrencyClass.currencyConvertFunction(context,inputNumber);
                 output.setText(result);
             } else {
                 Toast.makeText(getApplicationContext(), "Please enter a number.", Toast.LENGTH_SHORT).show();

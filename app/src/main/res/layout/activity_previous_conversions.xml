@@ -7,6 +7,20 @@
     android:background="@drawable/gradient"
     tools:context=".previousConversions">
 
+    <TextView
+        android:id="@+id/textviewPreviousConversions"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="134dp"
+        android:layout_marginEnd="5dp"
+        android:layout_marginRight="5dp"
+        android:gravity="center"
+        android:text="Previous Conversions"
+        android:textSize="34sp" />
+
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/floatingActionButton"
         android:layout_width="74dp"
@@ -30,4 +44,5 @@
         android:theme="@style/Theme.CurrencyConverter.AppBarOverlay">
 
     </com.google.android.material.appbar.AppBarLayout>
+
 </RelativeLayout>
