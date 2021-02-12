@@ -7,6 +7,7 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -21,26 +22,41 @@ public class phonestorageClass extends AppCompatActivity{
         String text = String.format("%.2f %s = %.2f %s\n", amountFrom, currencyFrom, amountTo, currencyTo);
 //        Context ctx = getApplicationContext();
 //        Log.i("Context: ", ctx.toString());
-        FileOutputStream fos = null;
+
+        File path = context.getFilesDir();
+
+        File file = new File(path, FILE_NAME);
         try {
-            fos = context.openFileOutput(FILE_NAME, MODE_PRIVATE);
-            fos.write(text.getBytes());
-            Log.i("Info:", "Writing: " + text + "to file " + FILE_NAME);
+            FileOutputStream stream = new FileOutputStream(file, true);
+            stream.write(text.getBytes());
+            stream.close();
         } catch (FileNotFoundException e) {
             e.printStackTrace();
-            Log.i("Error:", "Cannot save to file!");
         } catch (IOException e) {
             e.printStackTrace();
         }
-        finally{
-            if(fos != null){
-                try {
-                    fos.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-        }
+
+
+//        FileOutputStream fos = null;
+//        try {
+//            fos = context.openFileOutput(FILE_NAME, MODE_PRIVATE);
+//            fos.write(text.getBytes());
+//            Log.i("Info:", "Writing: " + text + "to file " + FILE_NAME);
+//        } catch (FileNotFoundException e) {
+//            e.printStackTrace();
+//            Log.i("Error:", "Cannot save to file!");
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+//        finally{
+//            if(fos != null){
+//                try {
+//                    fos.close();
+//                } catch (IOException e) {
+//                    e.printStackTrace();
+//                }
+//            }
+//        }
     }
 
 
