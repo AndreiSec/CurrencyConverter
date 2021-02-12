@@ -1,14 +1,14 @@
 package com.example.currencyconverter;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
 
 import android.util.Log;
+import android.view.MenuInflater;
 import android.view.View;
 
 import android.view.Menu;
@@ -16,13 +16,16 @@ import android.view.MenuItem;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
-import android.widget.ImageButton;
+import android.widget.PopupMenu;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.PopupMenu;
 
 public class MainActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener{
-    // CREATE OBJECT FOR NUMBER INPUT FIELD
-    public EditText inputNumber = findViewById(R.id.editTextFromInput);
+
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,64 +46,86 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         //
 
 
-//        FloatingActionButton fab = findViewById(R.id.fab);
-//        fab.setOnClickListener(new View.OnClickListener() {
+
+        // Set up a listener to change the activity to the previous conversion
+//        FloatingActionButton toPreviousConversions = findViewById(R.id.menuButton);
+//        toPreviousConversions.setOnClickListener(new View.OnClickListener() {
 //            @Override
 //            public void onClick(View view) {
-//                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-//                        .setAction("Action", null).show();
+//            Intent intent = new Intent(view.getContext(), previousConversions.class);
+//            startActivity(intent);
 //            }
 //        });
+
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-        return true;
+
+    public void switchViewToPreviousConversions(){
+        Intent intent = new Intent(getApplicationContext(), previousConversions.class);
+        startActivity(intent);
+
     }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
+    public void switchToMainView(){
+        Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+        startActivity(intent);
+    }
 
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
+
+    public void showPopup(View v) {
+        PopupMenu popup = new PopupMenu(this, v);
+        MenuInflater inflater = popup.getMenuInflater();
+        inflater.inflate(R.menu.dropdownmenu, popup.getMenu());
+        popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+            public boolean onMenuItemClick(MenuItem item) {
+                // Handle item selection
+                switch (item.getItemId()) {
+                    case R.id.previousConversionXML:
+                        switchViewToPreviousConversions();
+                        return true;
+
+                    default:
+                        return true;
+                }
+            }
+        });
+
+        popup.show(); //showing popup menu
+    }
+
+
+        // What happens when "convert" button is pressed!!
+        public void convertButtonClickFunction (View view){
+            // CREATE OBJECT FOR NUMBER INPUT FIELD
+            EditText inputNumber = findViewById(R.id.editTextFromInput);
+            TextView output = findViewById(R.id.textViewToCurrency);
+            Log.i("CurrencyFrom: ", CurrencyClass.currencyFrom);
+            Log.i("CurrencyTo: ", CurrencyClass.currencyTo);
+            Log.i("Input Value: ", inputNumber.getText().toString());
+
+            // Since all variables are public, this function does not need any parameters.
+            if (!inputNumber.getText().toString().equals("")) {
+                String result = CurrencyClass.currencyConvertFunction(inputNumber);
+                output.setText(result);
+            } else {
+                Toast.makeText(getApplicationContext(), "Please enter a number.", Toast.LENGTH_SHORT).show();
+            }
+
         }
 
-        return super.onOptionsItemSelected(item);
-    }
+        @Override
+        public void onItemSelected (AdapterView < ? > parent, View view,int position, long id){
+            switch (parent.getId()) {
+                case R.id.spinnerFrom:
+                    CurrencyClass.currencyFrom = parent.getItemAtPosition(position).toString();
+                    break;
+                case R.id.spinnerTo:
+                    CurrencyClass.currencyTo = parent.getItemAtPosition(position).toString();
+            }
+        }
 
+        @Override
+        public void onNothingSelected (AdapterView < ? > parent){
 
-    // What happens when "convert" button is pressed!!
-    public void convertButtonClickFunction(View view){
-
-    Log.i("CurrencyFrom: ", CurrencyClass.currencyFrom);
-        Log.i("CurrencyTo: ", CurrencyClass.currencyTo);
-        Log.i("Input Value: ", inputNumber.getText().toString());
-
-        // Since all variables are public, this function does not need any parameters.
-        String result = CurrencyClass.currencyConvertFunction();
-
-    }
-
-    @Override
-    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-        switch(parent.getId()){
-            case R.id.spinnerFrom:
-                CurrencyClass.currencyFrom = parent.getItemAtPosition(position).toString();
-                break;
-            case R.id.spinnerTo:
-                CurrencyClass.currencyTo = parent.getItemAtPosition(position).toString();
         }
     }
-
-    @Override
-    public void onNothingSelected(AdapterView<?> parent) {
-
-    }
-}
