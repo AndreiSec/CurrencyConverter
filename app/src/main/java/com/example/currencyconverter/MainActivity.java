@@ -1,5 +1,6 @@
 package com.example.currencyconverter;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.Layout;
@@ -25,11 +26,6 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
 
     private Context context;
-
-<<<<<<< Updated upstream
-
-=======
->>>>>>> Stashed changes
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
