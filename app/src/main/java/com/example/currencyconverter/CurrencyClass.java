@@ -18,70 +18,70 @@ public class CurrencyClass {
     public static String currencyTo;
 
     // Converts currencies and outputs the result as a string
-    public static String currencyConvertFunction(Context context, EditText inputNumber){
-    String result;
-    Double numberResult;
-    Double amountFrom = Double.parseDouble(inputNumber.getText().toString());
+    public static String currencyConvertFunction(Context context, EditText inputNumber) {
+        String result;
+        Double numberResult;
+        Double amountFrom = Double.parseDouble(inputNumber.getText().toString());
 
-    Double USDAmount;
+        Double USDAmount;
 
-    switch(currencyFrom){
+        switch (currencyFrom) {
 
-        case "USD":
-            USDAmount = amountFrom;
-            break;
-        case "CAD":
-            USDAmount = amountFrom/USDtoCad;
-            break;
-        case "EUR":
-            USDAmount = amountFrom/USDtoEur;
-            break;
-        case "JPY":
-            USDAmount = amountFrom/USDtoJPY;
-            break;
-        case "GBP":
-            USDAmount = amountFrom/USDtoGbp;
-            break;
-        case "CHF":
-            USDAmount = amountFrom/USDtoChf;
-            break;
-        default:
-            USDAmount = 0.00;
-    }
+            case "USD":
+                USDAmount = amountFrom;
+                break;
+            case "CAD":
+                USDAmount = amountFrom / USDtoCad;
+                break;
+            case "EUR":
+                USDAmount = amountFrom / USDtoEur;
+                break;
+            case "JPY":
+                USDAmount = amountFrom / USDtoJPY;
+                break;
+            case "GBP":
+                USDAmount = amountFrom / USDtoGbp;
+                break;
+            case "CHF":
+                USDAmount = amountFrom / USDtoChf;
+                break;
+            default:
+                USDAmount = 0.00;
+        }
 
-        switch(currencyTo){
+        switch (currencyTo) {
 
             case "USD":
                 numberResult = USDAmount;
                 break;
             case "CAD":
-                numberResult =USDAmount*USDtoCad;
+                numberResult = USDAmount * USDtoCad;
                 break;
             case "EUR":
-                numberResult = USDAmount*USDtoEur;
+                numberResult = USDAmount * USDtoEur;
                 break;
             case "JPY":
-                numberResult = USDAmount*USDtoJPY;
+                numberResult = USDAmount * USDtoJPY;
                 break;
             case "GBP":
-                numberResult = USDAmount*USDtoGbp;
+                numberResult = USDAmount * USDtoGbp;
                 break;
             case "CHF":
-                numberResult = USDAmount*USDtoChf;
+                numberResult = USDAmount * USDtoChf;
                 break;
             default:
                 numberResult = 0.00;
         }
 
-    numberResult = round(numberResult, 2);
-    result = String.valueOf(numberResult);
+        numberResult = round(numberResult, 2);
+        result = String.valueOf(numberResult);
 
-    // FINALLY, SAVE TO FILE. This is done so the user can see their previous conversions
-        // Even after closing the app
-        new phonestorageClass().saveToFile(context,round(amountFrom, 2), numberResult, currencyFrom, currencyTo);
+        // FINALLY, SAVE TO FILE. This is done so the user can see their previous conversions even after closing the app
+        phonestorageClass store = new phonestorageClass(context);
+        store.saveToDB(context, round(amountFrom, 2), numberResult, currencyFrom, currencyTo);
 
 
-    return result;
+        return result;
     }
 
     private static double round(double value, int places) {

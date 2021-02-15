@@ -5,14 +5,18 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ListView;
 
 public class previousConversions extends AppCompatActivity {
-
+    ListView listViewPreviousConversions;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         getSupportActionBar().hide();
         setContentView(R.layout.activity_previous_conversions);
+        listViewPreviousConversions  = (ListView) findViewById(R.id.lvPrevConversions);
+        new phonestorageClass(getApplicationContext()).fetchFromDBIntoList(getApplicationContext(), listViewPreviousConversions);
+
     }
 
 
@@ -26,9 +30,9 @@ public class previousConversions extends AppCompatActivity {
     private void switchToMainView(){
         Intent intent = new Intent(previousConversions.this, MainActivity.class);
         startActivity(intent);
-//        finish();
-//        Intent intent = new Intent(this., MainActivity.class);
-//        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-//        startActivity(intent);
+
     }
+
+
+
 }
