@@ -2,13 +2,16 @@ package com.example.currencyconverter;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Layout;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
+import android.widget.ListView;
 import android.widget.PopupMenu;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -16,17 +19,23 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-public class MainActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener{
+import java.util.List;
+
+public class MainActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
 
+    private Context context;
 
+<<<<<<< Updated upstream
+
+=======
+>>>>>>> Stashed changes
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-//        Toolbar toolbar = findViewById(R.id.toolbar);
-//        setSupportActionBar(toolbar);
+
 
         // CREATE TO AND FROM CURRENCY PICKER SPINNERS
         Spinner spinnerFrom = findViewById(R.id.spinnerFrom);
@@ -39,30 +48,26 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         spinnerTo.setOnItemSelectedListener(this);
         //
 
+<<<<<<< Updated upstream
 
+=======
+        // Init application context. This will be passed to a variety of functions.
+        context = getApplicationContext();
+        Log.i("Context:", context.toString());
+>>>>>>> Stashed changes
 
-        // Set up a listener to change the activity to the previous conversion
-//        FloatingActionButton toPreviousConversions = findViewById(R.id.menuButton);
-//        toPreviousConversions.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//            Intent intent = new Intent(view.getContext(), previousConversions.class);
-//            startActivity(intent);
-//            }
-//        });
 
     }
 
-
-    public void switchViewToPreviousConversions(){
-        Intent intent = new Intent(getApplicationContext(), previousConversions.class);
+    // Switches the view to the previous conversions activity
+    public void switchViewToPreviousConversions() {
+        Intent intent = new Intent(MainActivity.this, previousConversions.class);
         startActivity(intent);
 
     }
 
 
-
-
+    // Initializes the "menu" on the screen when the user clicks the cog wheel FAB
     public void showPopup(View v) {
         PopupMenu popup = new PopupMenu(this, v);
         MenuInflater inflater = popup.getMenuInflater();
@@ -72,7 +77,12 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                 // Handle item selection
                 switch (item.getItemId()) {
                     case R.id.previousConversionXML:
+                        // Switch view when button pressed
                         switchViewToPreviousConversions();
+//                        LayoutInflater layoutInflater = LayoutInflater.from(context);
+//                        layoutInflater.inflate(R.layout.activity_previous_conversions, null);
+
+
                         return true;
 
                     default:
@@ -85,6 +95,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     }
 
 
+<<<<<<< Updated upstream
         // What happens when "convert" button is pressed!!
         public void convertButtonClickFunction (View view){
             // CREATE OBJECT FOR NUMBER INPUT FIELD
@@ -102,21 +113,44 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                 Toast.makeText(getApplicationContext(), "Please enter a number.", Toast.LENGTH_SHORT).show();
             }
 
+=======
+    // What happens when "convert" button is pressed!!
+    public void convertButtonClickFunction(View view) {
+        // CREATE OBJECT FOR NUMBER INPUT FIELD
+        EditText inputNumber = findViewById(R.id.editTextFromInput);
+        TextView output = findViewById(R.id.textViewToCurrency);
+        Log.i("CurrencyFrom: ", CurrencyClass.currencyFrom);
+        Log.i("CurrencyTo: ", CurrencyClass.currencyTo);
+        Log.i("Input Value: ", inputNumber.getText().toString());
+
+        // Since all variables are public, this function does not need any parameters.
+        if (!inputNumber.getText().toString().equals("")) {
+            String result = CurrencyClass.currencyConvertFunction(context, inputNumber);
+            output.setText(result);
+        } else {
+            Toast.makeText(getApplicationContext(), "Please enter a number.", Toast.LENGTH_SHORT).show();
+>>>>>>> Stashed changes
         }
 
-        @Override
-        public void onItemSelected (AdapterView < ? > parent, View view,int position, long id){
-            switch (parent.getId()) {
-                case R.id.spinnerFrom:
-                    CurrencyClass.currencyFrom = parent.getItemAtPosition(position).toString();
-                    break;
-                case R.id.spinnerTo:
-                    CurrencyClass.currencyTo = parent.getItemAtPosition(position).toString();
-            }
-        }
+    }
 
-        @Override
-        public void onNothingSelected (AdapterView < ? > parent){
 
+    // When an item is selected in the drop-down spinners containing to and from currencies
+    @Override
+    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+        switch (parent.getId()) {
+            case R.id.spinnerFrom:
+                CurrencyClass.currencyFrom = parent.getItemAtPosition(position).toString();
+                break;
+            case R.id.spinnerTo:
+                CurrencyClass.currencyTo = parent.getItemAtPosition(position).toString();
         }
     }
+
+
+    // Empty method if nothing selected
+    @Override
+    public void onNothingSelected(AdapterView<?> parent) {
+
+    }
+}
