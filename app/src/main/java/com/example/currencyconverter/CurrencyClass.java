@@ -7,11 +7,11 @@ import java.math.BigDecimal;
 import java.math.RoundingMode;
 
 public class CurrencyClass {
-    private static double USDtoCad = 1.27;
-    private static double USDtoEur = 0.83;
-    private static double USDtoJPY = 104.60;
-    private static double USDtoGbp = 0.72;
-    private static double USDtoChf = 0.89;
+    private static final double USDtoCad = 1.27;
+    private static final double USDtoEur = 0.83;
+    private static final double USDtoJPY = 104.60;
+    private static final double USDtoGbp = 0.72;
+    private static final double USDtoChf = 0.89;
 
 
     public static String currencyFrom;
