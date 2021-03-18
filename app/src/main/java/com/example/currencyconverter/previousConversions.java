@@ -9,13 +9,12 @@ import android.widget.ListView;
 
 public class previousConversions extends AppCompatActivity {
     ListView listViewPreviousConversions;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         getSupportActionBar().hide();
         setContentView(R.layout.activity_previous_conversions);
-        listViewPreviousConversions = (ListView) findViewById(R.id.lvPrevConversions);
+        listViewPreviousConversions  = (ListView) findViewById(R.id.lvPrevConversions);
         new phonestorageClass(getApplicationContext()).fetchFromDBIntoList(getApplicationContext(), listViewPreviousConversions);
 
     }
@@ -23,16 +22,17 @@ public class previousConversions extends AppCompatActivity {
 
     // What happens when the "<-" back button is pressed on any view but the main.
     // Return to main view
-    public void backButtonClickFunction(View view) {
+    public void backButtonClickFunction (View view){
         switchToMainView();
 
     }
 
-    private void switchToMainView() {
+    private void switchToMainView(){
         Intent intent = new Intent(previousConversions.this, MainActivity.class);
         startActivity(intent);
 
     }
+
 
 
 }

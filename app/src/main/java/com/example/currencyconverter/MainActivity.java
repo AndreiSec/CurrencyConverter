@@ -3,16 +3,13 @@ package com.example.currencyconverter;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.text.Layout;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
-import android.widget.ListView;
 import android.widget.PopupMenu;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -20,12 +17,11 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import java.util.List;
-
 public class MainActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
 
     private Context context;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,13 +40,9 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         spinnerTo.setOnItemSelectedListener(this);
         //
 
-<<<<<<< Updated upstream
-
-=======
         // Init application context. This will be passed to a variety of functions.
         context = getApplicationContext();
         Log.i("Context:", context.toString());
->>>>>>> Stashed changes
 
 
     }
@@ -91,25 +83,6 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     }
 
 
-<<<<<<< Updated upstream
-        // What happens when "convert" button is pressed!!
-        public void convertButtonClickFunction (View view){
-            // CREATE OBJECT FOR NUMBER INPUT FIELD
-            EditText inputNumber = findViewById(R.id.editTextFromInput);
-            TextView output = findViewById(R.id.textViewToCurrency);
-            Log.i("CurrencyFrom: ", CurrencyClass.currencyFrom);
-            Log.i("CurrencyTo: ", CurrencyClass.currencyTo);
-            Log.i("Input Value: ", inputNumber.getText().toString());
-
-            // Since all variables are public, this function does not need any parameters.
-            if (!inputNumber.getText().toString().equals("")) {
-                String result = CurrencyClass.currencyConvertFunction(inputNumber);
-                output.setText(result);
-            } else {
-                Toast.makeText(getApplicationContext(), "Please enter a number.", Toast.LENGTH_SHORT).show();
-            }
-
-=======
     // What happens when "convert" button is pressed!!
     public void convertButtonClickFunction(View view) {
         // CREATE OBJECT FOR NUMBER INPUT FIELD
@@ -125,7 +98,6 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
             output.setText(result);
         } else {
             Toast.makeText(getApplicationContext(), "Please enter a number.", Toast.LENGTH_SHORT).show();
->>>>>>> Stashed changes
         }
 
     }
